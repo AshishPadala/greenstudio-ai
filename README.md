@@ -35,6 +35,32 @@ GreenStudio AI explores that idea by combining **concise AI responses** with **r
 
 ---
 
-## 🛠️ How We Built It
+### Key Design Choices
+- **Serverless backend** to protect API keys
+- **REST-based Gemini integration** for reliability
+- **One-sentence response constraint** to reduce waste
+- **Real-time eco metrics** calculated from token usage
+- **Netlify deployment** for fast, scalable hosting
 
-### Architecture
+---
+
+## 🧰 Built With
+
+- **Frontend**
+  - React
+  - TypeScript
+  - Vite
+  - CSS (custom styling)
+
+- **Backend**
+  - Netlify Functions
+  - Node.js
+
+- **AI**
+  - Google Gemini API (via REST)
+
+- **Deployment**
+  - GitHub
+  - Netlify
+
+---
