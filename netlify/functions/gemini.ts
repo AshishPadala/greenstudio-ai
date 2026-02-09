@@ -9,7 +9,8 @@ export const handler: Handler = async (event) => {
   }
 
   try {
-    const { prompt } = JSON.parse(event.body || "{}");
+    //const { prompt } = JSON.parse(event.body || "{}");
+    console.log("Incoming body:", event.body);
 
     const model = genAI.getGenerativeModel({
       model: "gemini-3-flash-preview",
