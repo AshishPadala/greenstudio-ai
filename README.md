@@ -9,7 +9,7 @@ This project was built for the **Gemini Hackathon**, focusing on the idea that *
 
 ## 🌍 Inspiration
 
-The inspiration for GreenStudio AI came from **Priya’s work on CO₂ tracking for aeroplanes**.  
+The inspiration for GreenStudio AI came from **Working on CO₂ tracking for aeroplanes**.  
 That project highlighted how invisible emissions can be measured and optimized.
 
 At the same time, there has been growing concern about the **water and electricity consumption of large language models (LLMs)**. This sparked the idea:
