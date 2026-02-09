@@ -1,7 +1,5 @@
 import { Handler } from "@netlify/functions";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+import { GoogleGenAI } from "@google/genai";
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -18,26 +16,22 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const model = genAI.getGenerativeModel({
-      model: "models/gemini-1.0-pro",
-      systemInstruction:
-        "Answer in one short factual sentence. No explanations. No lists."
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY!
     });
 
-    const result = await model.generateContent({
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: prompt }]
-        }
-      ]
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash",
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      config: {
+        systemInstruction:
+          "Answer in one short factual sentence. No explanations. No lists.",
+        temperature: 0.1,
+        maxOutputTokens: 40
+      }
     });
 
-    const text =
-      result.response.candidates?.[0]?.content?.parts
-        ?.map((p: any) => p.text)
-        ?.join(" ")
-        ?.trim() || "No response";
+    const text = response.text || "No response";
 
     return {
       statusCode: 200,
@@ -45,12 +39,9 @@ export const handler: Handler = async (event) => {
     };
   } catch (err: any) {
     console.error("Gemini function error:", err);
-
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: err.message || "Gemini backend error"
-      })
+      body: JSON.stringify({ error: err.message })
     };
   }
 };
