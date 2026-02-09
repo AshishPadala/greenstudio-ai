@@ -9,31 +9,46 @@ export const handler: Handler = async (event) => {
   }
 
   try {
-    //const { prompt } = JSON.parse(event.body || "{}");
-    console.log("Incoming body:", event.body);
+    const { prompt } = JSON.parse(event.body || "{}");
+
+    if (!prompt) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Missing prompt" })
+      };
+    }
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-3-flash-preview",
-      systemInstruction:
-        "Answer in ONE short sentence. No explanations. No lists. No markdown. No refusal unless unsafe."
+      model: "gemini-1.5-flash"
     });
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text()?.trim();
+    const result = await model.generateContent({
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: prompt }]
+        }
+      ]
+    });
+
+    // ✅ SAFE extraction (THIS FIXES "No response")
+    const text =
+      result.response.candidates?.[0]?.content?.parts
+        ?.map((p: any) => p.text)
+        ?.join(" ")
+        ?.trim() || "No response";
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        text: text || "No response"
-      })
+      body: JSON.stringify({ text })
     };
   } catch (err: any) {
-    console.error("Gemini error:", err);
+    console.error("Gemini function error:", err);
 
     return {
       statusCode: 500,
       body: JSON.stringify({
-        text: "No response"
+        error: err.message || "Gemini backend error"
       })
     };
   }
