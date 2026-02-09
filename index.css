@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f7f8fa;
+  color: #111;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ---------- HEADER ---------- */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  border: none;
+  background: #f1f5f9;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ---------- CHAT ---------- */
+.chat-wrapper {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.watermark {
+  text-align: center;
+  opacity: 0.4;
+  margin-top: 80px;
+  font-size: 18px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.chat-bubble.user {
+  margin-left: auto;
+  background: #111827;
+  color: white;
+}
+
+.chat-bubble.assistant {
+  margin-right: auto;
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-text {
+  margin-bottom: 6px;
+}
+
+.chat-eco {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  opacity: 0.7;
+  padding-top: 6px;
+  border-top: 1px dashed #e5e7eb;
+  flex-wrap: wrap;
+}
+
+/* ---------- INPUT ---------- */
+.input-wrapper {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+}
+
+.input-wrapper button {
+  padding: 0 18px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background: #10b981;
+  color: white;
+  cursor: pointer;
+}
+
+.input-wrapper button:hover {
+  background: #059669;
+}
+
+/* ---------- DARK MODE ---------- */
+.app-root.dark {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.app-root.dark .top-bar,
+.app-root.dark .input-wrapper {
+  background: #020617;
+  border-color: #1f2937;
+}
+
+.app-root.dark .chat-bubble.assistant {
+  background: #111827;
+  border-color: #1f2937;
+}
+
+.app-root.dark input {
+  background: #020617;
+  color: #e5e7eb;
+  border-color: #1f2937;
+}
+
+.app-root.dark .chat-eco {
+  border-color: #374151;
+  color: #9ca3af;
+}
