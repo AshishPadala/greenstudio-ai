@@ -1,5 +1,4 @@
 import { Handler } from "@netlify/functions";
-import { GoogleGenAI } from "@google/genai";
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -16,29 +15,35 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const ai = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY!
-    });
-
-    const response = await ai.models.generateContent({
-      model: "gemini-3-flash",
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      config: {
-        systemInstruction:
-          "Answer in one short factual sentence. No explanations. No lists.",
-        temperature: 0.1,
-        maxOutputTokens: 40
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +
+        process.env.GEMINI_API_KEY,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: prompt }]
+            }
+          ]
+        })
       }
-    });
+    );
 
-    const text = response.text || "No response";
+    const data = await response.json();
+
+    const text =
+      data?.candidates?.[0]?.content?.parts
+        ?.map((p: any) => p.text)
+        ?.join(" ")
+        ?.trim() || "No response";
 
     return {
       statusCode: 200,
       body: JSON.stringify({ text })
     };
   } catch (err: any) {
-    console.error("Gemini function error:", err);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: err.message })
