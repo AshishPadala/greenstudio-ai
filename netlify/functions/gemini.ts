@@ -19,7 +19,9 @@ export const handler: Handler = async (event) => {
     }
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-3-flash"
+      model: "models/gemini-1.0-pro",
+      systemInstruction:
+        "Answer in one short factual sentence. No explanations. No lists."
     });
 
     const result = await model.generateContent({
@@ -31,7 +33,6 @@ export const handler: Handler = async (event) => {
       ]
     });
 
-    // ✅ SAFE extraction (THIS FIXES "No response")
     const text =
       result.response.candidates?.[0]?.content?.parts
         ?.map((p: any) => p.text)
