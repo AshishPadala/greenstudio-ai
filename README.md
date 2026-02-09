@@ -1,20 +1,40 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌱 GreenStudio AI  
+**Eco-Optimized Conversational AI Layer**
 
-# Run and deploy your AI Studio app
+GreenStudio AI is a sustainability-aware AI chat system that demonstrates how **large language models can reduce environmental impact** by generating **concise, task-focused responses** while transparently tracking **token usage, energy, water, and CO₂ savings** in real time.
 
-This contains everything you need to run your app locally.
+This project was built for the **Gemini Hackathon**, focusing on the idea that *every unnecessary token has a real environmental cost*.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1rqb-LL6XhupeNR6myu6xCHmTkExLxkHr
+---
 
-## Run Locally
+## 🌍 Inspiration
 
-**Prerequisites:**  Node.js
+The inspiration for GreenStudio AI came from **Priya’s work on CO₂ tracking for aeroplanes**.  
+That project highlighted how invisible emissions can be measured and optimized.
 
+At the same time, there has been growing concern about the **water and electricity consumption of large language models (LLMs)**. This sparked the idea:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+> *What if AI systems could make their environmental cost visible — and actively reduce it?*
+
+GreenStudio AI explores that idea by combining **concise AI responses** with **real-time eco-impact metrics**.
+
+---
+
+## 🚀 What It Does
+
+- Provides a **chat interface** similar to ChatGPT
+- Forces **minimal, efficient AI responses** to reduce token usage
+- Calculates and displays **eco impact per response**:
+  - Tokens used
+  - Energy saved (kWh)
+  - Water saved (litres)
+  - CO₂ saved (grams)
+- Aggregates **session-wide sustainability metrics**
+- Includes **dark mode** and a clean, modern UI
+- Uses a **serverless backend** for secure API handling
+
+---
+
+## 🛠️ How We Built It
+
+### Architecture
